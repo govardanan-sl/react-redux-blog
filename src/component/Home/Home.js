@@ -61,10 +61,8 @@ class Home extends Component {
         });
     }
     componentDidMount(){
-        const accessToken = this.props.accessToken;
-        if(accessToken){
-            this.fetchPosts(accessToken);
-        }
+        const accessToken = this.props?.accessToken;
+        accessToken&&this.fetchPosts(accessToken);
     }
     componentWillUnmount() {
         this.abortController.abort();
