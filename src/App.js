@@ -12,13 +12,15 @@ import ErrorBoundary from './component/ErrorBoundary/ErrorBoundary';
 import NewProfile from './component/Profile/Profile';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { persistor, store } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
   return (
    <Router>
       <div className="App">
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Navbar/>
           <div className="content">
           <ErrorBoundary>
@@ -56,6 +58,7 @@ function App() {
             </Switch>
           </ErrorBoundary>
           </div>
+          </PersistGate>
         </Provider>
       </div>
     </Router>
