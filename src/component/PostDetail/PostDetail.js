@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
 class PostDetail extends Component {
@@ -13,7 +14,7 @@ class PostDetail extends Component {
     }
     abortController = new window.AbortController();
     fetchPosts(id){
-        const {accessToken} =this.props.UserProfileID;
+        const accessToken =this.props.accessToken;
         let url ="https://backend-react-json-server-auth.herokuapp.com/posts/"+id;
         let homeHeaders = new Headers();
         homeHeaders.append("Authorization","Bearer "+accessToken);
@@ -63,7 +64,7 @@ class PostDetail extends Component {
     handleDelete = () => {
         const id = this.props.match.params.id;
         let postDetailHeaders = new Headers();
-        const {accessToken} = this.props.UserProfileID;
+        const accessToken = this.props.accessToken;
         postDetailHeaders.append("Authorization","Bearer "+accessToken);
         postDetailHeaders.append("signal",this.abortController.signal);
         let requestOptions= {
@@ -84,7 +85,7 @@ class PostDetail extends Component {
     }
     componentDidMount(){
         const id = this.props.match.params.id;
-        const {accessToken} = this.props.UserProfileID;
+        const accessToken = this.props.accessToken;
         if(accessToken){
             this.fetchPosts(id);
         }
@@ -110,4 +111,13 @@ class PostDetail extends Component {
     }
 }
 
-export default withRouter(PostDetail);
+
+const mapStateToProps = (state) =>{
+    return{
+        isLoggedIn : state.isLoggedIn,
+        profile_id : state.profile_id,
+        accessToken: state.accessToken
+    }
+}
+
+export default connect(mapStateToProps,null)(withRouter(PostDetail));

@@ -1,10 +1,11 @@
 import {useParams} from 'react-router-dom';
 import useFetch from '../useFetch';
 import {useHistory,Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const PostDetails = (props) =>{
     const { id } = useParams();
-    const {accessToken} = props.UserProfileID;
+    const accessToken = props.accessToken;
     let postDetailHeaders = new Headers();
     postDetailHeaders.append("Authorization","Bearer "+accessToken);
     let requestOptions = {
@@ -39,4 +40,14 @@ const PostDetails = (props) =>{
         </div>
     );
 }
-export default PostDetails;
+
+
+const mapStateToProps = (state) =>{
+    return{
+        isLoggedIn : state.isLoggedIn,
+        profile_id : state.profile_id,
+        accessToken: state.accessToken
+    }
+}
+
+export default connect(mapStateToProps,null)(PostDetails);

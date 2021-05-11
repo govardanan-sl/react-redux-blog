@@ -11,16 +11,10 @@ import HomeNew from './component/Home/Home';
 import ErrorBoundary from './component/ErrorBoundary/ErrorBoundary';
 import NewProfile from './component/Profile/Profile';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 
 function App() {
-  const [UserProfileID,setUserProfileID] = useState({
-         isLoggedIn : false,
-         profile_id : null,
-         accessToken:null
-  })
   return (
    <Router>
       <div className="App">
@@ -48,10 +42,10 @@ function App() {
                 <NewProfile/>
               </Route>
               <Route exact path="/profile/:id">
-                <ProfileDetails  UserProfileID={UserProfileID}></ProfileDetails>
+                <ProfileDetails></ProfileDetails>
               </Route>
               <Route path="/posts/:id">
-                <PostDetails  UserProfileID={UserProfileID}></PostDetails>
+                <PostDetails></PostDetails>
               </Route>
               <Route path="/old-home">
                 <Home/>
