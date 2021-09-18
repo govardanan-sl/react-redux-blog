@@ -1,6 +1,7 @@
 import React from 'react'
 import useFetch from '../useFetch';
 import { Link } from 'react-router-dom';
+import { get } from 'lodash';
 
 function Profile(props) {
     const {profile_id,accessToken} = props.UserProfileID;
@@ -25,5 +26,6 @@ function Profile(props) {
         </div>
     )
 }
+
 
 export default Profile;
