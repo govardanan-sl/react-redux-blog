@@ -6,7 +6,7 @@ import NotFound from './component/NotFound/NotFound';
 import ProfileDetails from './component/ProfileDetails/ProfileDetails';
 import Login from './component/Login/Login';
 import Register from './component/Login/Register';
-//import HomeNew from './component/Home/Home';
+import HomeNew from './component/Home/Home';
 import ErrorBoundary from './component/ErrorBoundary/ErrorBoundary';
 import NewProfile from './component/Profile/Profile';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
@@ -14,8 +14,6 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { lazy, Suspense } from 'react';
-
-const HomeNew = lazy(() => import('./component/Home/Home'/* webpackChunkName: "HomeNew" */));
 
 
 function App() {
