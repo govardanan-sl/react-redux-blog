@@ -1,14 +1,14 @@
 import './App.css';
 import Navbar from './component/Navbar';
 import Home from './component/Home';
-import PostDetails from './component/PostDetail/PostDetail';
+//import PostDetails from './component/PostDetail/PostDetail';
 import NotFound from './component/NotFound/NotFound';
-import ProfileDetails from './component/ProfileDetails/ProfileDetails';
+//import ProfileDetails from './component/ProfileDetails/ProfileDetails';
 import Login from './component/Login/Login';
 import Register from './component/Login/Register';
 //import HomeNew from './component/Home/Home';
 import ErrorBoundary from './component/ErrorBoundary/ErrorBoundary';
-import NewProfile from './component/Profile/Profile';
+//import NewProfile from './component/Profile/Profile';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
@@ -17,10 +17,16 @@ import { lazy, Suspense } from 'react';
 
 const HomeNew = lazy(() => import('./component/Home/Home'/* webpackChunkName: "HomeNew" */));
 
+const ProfileDetails = lazy(()=> import('./component/ProfileDetails/ProfileDetails'/* webpackChunkName: "ProfileDetails" */))
+
+const NewProfile = lazy(()=> import('./component/Profile/Profile'/* webpackChunkName: "Profile" */))
+
+const PostDetails = lazy(()=> import('./component/PostDetail/PostDetail'/* webpackChunkName: "PostDetail" */))
 
 function App() {
   return (
    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
       <div className="App">
         <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -29,9 +35,7 @@ function App() {
           <ErrorBoundary>
             <Switch>
               <Route exact path="/">
-                <Suspense fallback={<div>Loading...</div>}>
-                  <HomeNew/>
-                </Suspense>
+                <HomeNew/>
               </Route>
               <Route exact path="/react-blog-test-v2">
                 <Suspense fallback={<div>Loading...</div>}>
@@ -65,6 +69,7 @@ function App() {
           </PersistGate>
         </Provider>
       </div>
+    </Suspense>
     </Router>
   );
 }
